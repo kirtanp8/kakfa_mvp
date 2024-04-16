@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-kafka-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-kafka-app
+  template:
+    metadata:
+      labels:
+        app: flask-kafka-app
+    spec:
+      containers:
+        - name: flask-kafka-app
+          image: kirtanp8/flask-kafka-app:latest
+          ports:
+            - containerPort: 5000
