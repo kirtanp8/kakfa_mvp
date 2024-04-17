@@ -1,34 +1,30 @@
-# flask-app-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app
+  name: flask-kafka
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-app
+      app: flask-kafka
   template:
     metadata:
       labels:
-        app: flask-app
+        app: flask-kafka
     spec:
       containers:
-        - name: flask-app
-          image: flask-kafka-app
+        - name: flask-kafka
+          image: kirtanp8/flask-kafka:latest
           ports:
             - containerPort: 5000
-          env:
-            - name: KAFKA_SERVICE
-              value: kafka-service
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-app-service
+  name: flask-kafka
 spec:
   selector:
-    app: flask-app
+    app: flask-kafka
   ports:
     - protocol: TCP
       port: 80
